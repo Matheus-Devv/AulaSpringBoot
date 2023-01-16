@@ -9,9 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class UserSecurityService {
@@ -23,7 +20,7 @@ public class UserSecurityService {
     }
 
     @Transactional
-    public UserModel save(UserPostRequestBody userPostRequestBody) {
+    public UserModel creatingUser(UserPostRequestBody userPostRequestBody) {
         UserModel userModel = UserModel.builder()
                 .username(userPostRequestBody.getUsername())
                 .password(passwordEncoder().encode(userPostRequestBody.getPassword()))

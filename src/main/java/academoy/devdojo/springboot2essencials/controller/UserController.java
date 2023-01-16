@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping(path = "/register")
     public ResponseEntity<UserModel> save(@RequestBody @Valid UserPostRequestBody userPostRequestBody) {
-        return new ResponseEntity<>(userSecurityService.save(userPostRequestBody), HttpStatus.CREATED);
+        return new ResponseEntity<>(userSecurityService.creatingUser(userPostRequestBody), HttpStatus.CREATED);
     }
 
 //    @DeleteMapping

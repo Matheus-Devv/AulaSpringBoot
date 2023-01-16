@@ -37,13 +37,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("animes").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/admin/register-admin").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+//                .antMatchers("/animes/by-id").permitAll()
+//                .antMatchers("/animes").permitAll()
+////                .antMatchers("/login").permitAll()
+//                .antMatchers("/user/register").permitAll()
+
+//                .antMatchers("/admin/register-admin").permitAll()
+//                .antMatchers("/user/**").hasRole("USER")
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().permitAll()
                 .and()
                 .httpBasic()
                 .and()
@@ -82,7 +84,6 @@ public class SecurityConfig {
 //                .build();
 //        return new InMemoryUserDetailsManager(user, admin);
 //    }
-
 
 }
 

@@ -6,10 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -22,6 +19,9 @@ public class UserModel implements GrantedAuthority,UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
+
+    @OneToMany(mappedBy = "author")                     // mappedBy indicates that this side is the inverse
+    private List<Anime> animes;
 
     @Column(nullable = false,unique = true)
     private String username;

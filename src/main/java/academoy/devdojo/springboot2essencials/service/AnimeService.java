@@ -1,12 +1,19 @@
 package academoy.devdojo.springboot2essencials.service;
 
+import academoy.devdojo.springboot2essencials.config.security.UserDetailsServiceImpl;
 import academoy.devdojo.springboot2essencials.domain.Anime;
+import academoy.devdojo.springboot2essencials.domain.UserModel;
 import academoy.devdojo.springboot2essencials.exception.BadRequestException;
 import academoy.devdojo.springboot2essencials.mapper.AnimeMapper;
 import academoy.devdojo.springboot2essencials.repository.AnimeRepository;
 import academoy.devdojo.springboot2essencials.requests.AnimePostRequestBody;
 import academoy.devdojo.springboot2essencials.requests.AnimePutRequestBody;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +23,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnimeService {
 
+    @Bean
+    public UserModel userModel() {
+        return new UserModel();
+    }
+
     private final AnimeRepository animeRepository;
 
-    public List<Anime> listAll() {
+    public Page<Anime> listAll(Pageable pageable) {
+        return animeRepository.findAll(pageable);
+    }
+
+    public List<Anime> listAllNonPageble() {
         return animeRepository.findAll();
     }
 
@@ -33,6 +49,9 @@ public class AnimeService {
 
     @Transactional
     public Anime save(AnimePostRequestBody animePostRequestBody) {
+//        Anime anime = Anime.builder()
+//                .name(animePostRequestBody.getName())
+
         return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
@@ -46,4 +65,5 @@ public class AnimeService {
         anime.setId(savedAnime.getId());
         animeRepository.save(anime);
     }
+
 }

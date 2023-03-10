@@ -23,11 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnimeService {
 
-    @Bean
-    public UserModel userModel() {
-        return new UserModel();
-    }
-
     private final AnimeRepository animeRepository;
 
     public Page<Anime> listAll(Pageable pageable) {

@@ -11,6 +11,6 @@ public class Springboot2EssencialsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Springboot2EssencialsApplication.class, args);
 
-		System.out.println(new BCryptPasswordEncoder().encode("senha123"));
+//		System.out.println(new BCryptPasswordEncoder().encode("senha123"));
 	}
 }

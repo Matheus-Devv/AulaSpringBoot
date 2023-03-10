@@ -5,6 +5,7 @@ import academoy.devdojo.springboot2essencials.requests.AnimePostRequestBody;
 import academoy.devdojo.springboot2essencials.requests.AnimePutRequestBody;
 import academoy.devdojo.springboot2essencials.service.AnimeService;
 import academoy.devdojo.springboot2essencials.util.DateUtil;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -29,7 +30,7 @@ public class AnimeController {
 
     //localhost:8080/animes
     @GetMapping
-    public ResponseEntity<Page<Anime>> list(Pageable pageable) {
+    public ResponseEntity<Page<Anime>> list(@Parameter(hidden = true) Pageable pageable) {
         return ResponseEntity.ok(animeService.listAll(pageable));
     }
 
